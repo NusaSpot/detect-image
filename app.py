@@ -21,7 +21,8 @@ temp_model_path = 'download/temp_model.h5'
 # Memeriksa apakah file sudah ada
 if not os.path.exists(temp_model_path):
     temp_model_directory = 'download'
-    os.makedirs(temp_model_directory)
+    if not os.path.exists(temp_model_directory):
+        os.makedirs(temp_model_directory)
     # Jika belum ada, lakukan pengunduhan
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(model_filename)
@@ -138,6 +139,6 @@ def predict():
         return jsonify({'status': 'SUCCESS', 'predictions': predictions}), 200  # Format JSON untuk respons
     else:
         return jsonify({'status': 'ERROR', 'message': 'No file provided.'}), 400
- 
+        
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8080)
