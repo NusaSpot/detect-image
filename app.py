@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 # model = tf.keras.models.load_model('image_classifier.h5')
 bucket_name = 'nutricare'
-model_filename = 'image_classifier.h5'
+model_filename = 'klasifikasi_gambar.h5'
 storage_client = storage.Client.from_service_account_json('cloud-storage.json')
  
 temp_model_path = 'download/temp_model.h5'
