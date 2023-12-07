@@ -9,12 +9,22 @@ import requests
 import numpy as np
 from google.cloud import storage
 import os
+import json
  
 app = Flask(__name__)
 # model = tf.keras.models.load_model('image_classifier.h5')
 bucket_name = 'nutricare'
 model_filename = 'klasifikasi_gambar.h5'
-storage_client = storage.Client.from_service_account_json('cloud-storage.json')
+
+credentials_json_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+
+# Baca isi file JSON
+with open(credentials_json_path, 'r') as json_file:
+    credentials_json = json.load(json_file)
+
+# Inisialisasi Storage Client dengan Service Account JSON
+storage_client = storage.Client.from_service_account_info(credentials_json)
+
  
 temp_model_path = 'download/temp_model.h5'
  
