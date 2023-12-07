@@ -19,11 +19,12 @@ model_filename = 'klasifikasi_gambar.h5'
 credentials_json_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
 
 # Baca isi file JSON
-with open(credentials_json_path, 'r') as json_file:
-    credentials_json = json.load(json_file)
+# with open(credentials_json_path, 'r') as json_file:
+#     credentials_json = json.load(json_file)
 
 # Inisialisasi Storage Client dengan Service Account JSON
-storage_client = storage.Client.from_service_account_info(credentials_json)
+storage_client = storage.Client()
+# storage_client = storage.Client.from_service_account_info(credentials_json)
 
  
 temp_model_path = 'download/temp_model.h5'
