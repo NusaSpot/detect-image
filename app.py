@@ -12,44 +12,7 @@ import os
 import json
  
 app = Flask(__name__)
-# model = tf.keras.models.load_model('image_classifier.h5')
-bucket_name = 'nutricare'
-model_filename = 'klasifikasi_gambar.h5'
-
-# production
-storage_client = storage.Client()
-
-# local
-
-# credentials_json_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
-
-# with open(credentials_json_path, 'r') as json_file:
-#     credentials_json = json.load(json_file)
-
-# Inisialisasi Storage Client dengan Service Account JSON
-# storage_client = storage.Client.from_service_account_info(credentials_json)
- 
-temp_model_path = 'download/temp_model.h5'
- 
-# Memeriksa apakah file sudah ada
-if not os.path.exists(temp_model_path):
-    temp_model_directory = 'download'
-    if not os.path.exists(temp_model_directory):
-        os.makedirs(temp_model_directory)
-    # Jika belum ada, lakukan pengunduhan
-    bucket = storage_client.get_bucket(bucket_name)
-    blob = bucket.blob(model_filename)
- 
-    model_file = BytesIO()
-    blob.download_to_file(model_file)
-    model_file.seek(0)
- 
-    # Menyimpan file ke lokasi lokal
-    with open(temp_model_path, 'wb') as temp_model_file:
-        temp_model_file.write(model_file.read())
- 
-# Load model using TensorFlow
-model = tf.keras.models.load_model(temp_model_path)
+model = tf.keras.models.load_model('klasifikasi_gambar.h5')
 app.config["ALLOWED_EXTENSIONS"] = set(['jpg', 'png', 'jpeg'])
  
 def allowed_file(filename):
