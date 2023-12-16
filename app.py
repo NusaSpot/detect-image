@@ -7,8 +7,6 @@ from werkzeug.utils import secure_filename
 from io import BytesIO
 import requests
 import numpy as np
-from google.cloud import storage
-import os
 import json
  
 app = Flask(__name__)
