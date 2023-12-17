@@ -30,7 +30,7 @@ def predict_single_url():
         img = Image.open(BytesIO(response.content)).convert("RGB")
  
         # Preprocess gambar dan lakukan prediksi
-        x = img_to_array(img.resize((150, 150))) / 255.
+        x = img_to_array(img.resize((224, 224))) / 255.
         x = np.expand_dims(x, axis=0)
  
         prediction = model.predict(x)
@@ -59,7 +59,7 @@ def predict_single():
         img_path = "./db/" + filename
         imgFile.save(img_path)
  
-        img = load_img(img_path, target_size=(150, 150))
+        img = load_img(img_path, target_size=(224, 224))
         x = img_to_array(img) / 255.
         x = np.expand_dims(x, axis=0)
  
@@ -92,7 +92,7 @@ def predict():
                 img_path = "./db/" + filename
                 imgFile.save(img_path)
  
-                img = load_img(img_path, target_size=(150, 150))
+                img = load_img(img_path, target_size=(224, 224))
  
                 x = img_to_array(img) / 255.
                 x = np.expand_dims(x, axis=0)
